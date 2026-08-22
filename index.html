@@ -1,13 +1,321 @@
 <!DOCTYPE html>
-<html lang=es>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="widht=device-widht,initial-scale=1.0">
-    <title>Terapias Alternativas El Oasis de la Salud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Oasis de La Salud - Terapias Alternativas</title>
+    <style>
+        :root {
+            --primary-color: #2c6e49;
+            --primary-light: #4c956c;
+            --accent-color: #ffc9b9;
+            --bg-color: #fefee3;
+            --text-color: #2b2d42;
+            --card-bg: #ffffff;
+            --header-height: 70px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-top: var(--header-height);
+        }
+
+        /* Menu Fijo Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .navbar .brand {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--primary-light);
+            color: #ffffff;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #ffffff;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-menu a {
+            color: var(--text-color);
+            display: block;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f7f4;
+            color: var(--primary-color);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background:   url('photo-1544367567-0f2fcb009e0b.png?fit=crop&w=1200&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 5rem 1.5rem;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #f7b2a0;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-light);
+            display: block;
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Cards Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--primary-light);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Banner Informativo */
+        .info-banner {
+            background-color: #e8f5e9;
+            border-left: 6px solid var(--primary-color);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .info-banner h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
 
-Hola Mundo
+    <!-- Menú Fijo Superior -->
+    <nav class="navbar">
+        <div class="brand">
+            🌿 El Oasis de La Salud
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            
+            <!-- Menú desplegable para los Programas HTML actualizados -->
+            <li class="dropdown">
+                <a href="#">MENU ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="oasisTN001.html">Terapia Neural</a></li>
+                    <li><a href="oasisOZ001.html">Ozonoterapia</a></li>
+                    <li><a href="oasisSR001.html">Sueros Regenerativos</a></li>
+                    <li><a href="oasisSV001.html">Sueros Vitaminados</a></li>
+                    <li><a href="oasisCT001.html">Conoterapia</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de Bienvenida / Hero -->
+    <header class="hero" id="inicio">
+        <h1>El Oasis de La Salud</h1>
+        <p>Centro de Terapias Alternativas y Salud Integral. Restaura el equilibrio natural de tu cuerpo con tratamientos vanguardistas.</p>
+        <a href="#servicios" class="btn">Explorar Tratamientos</a>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container">
+        
+        <section id="nosotros">
+            <h2 class="section-title">Nuestra Filosofía</h2>
+            <div class="info-banner">
+                <h3>Bienestar Natural e Integral</h3>
+                <p>En <strong>El Oasis de La Salud</strong> nos enfocamos en el origen de las dolencias y no solo en los síntomas. Combinamos la sabiduría de la medicina natural con técnicas modernas de regeneración celular para brindarte una atención personalizada y efectiva.</p>
+            </div>
+        </section>
+
+        <section id="servicios">
+            <h2 class="section-title">Especialidades y Terapias</h2>
+            <div class="services-grid">
+                
+                <div class="card">
+                    <h3>💉 <a href="oasisTN001.html">Terapia Neural</a></h3>
+                    <p>Estimulación del sistema nervioso vegetativo a través de microinyecciones en puntos específicos para neutralizar campos de interferencia y aliviar dolores estancados.</p>
+                </div>
+
+                <div class="card">
+                    <h3>💨 Ozonoterapia</h3>
+                    <p>Tratamiento médico con ozono altamente oxigenante, antiinflamatorio y revitalizante celular. Excelente para aliviar dolores crónicos y fortalecer el sistema inmune.</p>
+                </div>
+
+                <div class="card">
+                    <h3>🧪 Sueros Regenerativos</h3>
+                    <p>Tratamientos intravenosos formulados para acelerar la reparación celular, revitalizar tejidos y desintoxicar el organismo a nivel profundo.</p>
+                </div>
+
+                <div class="card">
+                    <h3>🍋 Sueros Vitaminados</h3>
+                    <p>Infusiones de vitaminas y minerales esenciales para elevar el sistema inmunológico, combatir el cansancio crónico y aportar energía inmediata.</p>
+                </div>
+
+                <div class="card">
+                    <h3>🕯️ Conoterapia</h3>
+                    <p>Terapia higiénica y relajante para la limpieza del conducto auditivo mediante conos de cera natural, ayudando a aliviar congestión, sinusitis y migrañas.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer id="contacto">
+        <p>&copy; 2026 El Oasis de La Salud — Terapias Alternativas. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
+</html>
